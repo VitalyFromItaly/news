@@ -1,32 +1,37 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <Wrapper />
   </div>
 </template>
+<script>
+import { mapActions, mapMutations, mapState } from "vuex";
+import Wrapper from "./components/Wrapper";
+export default {
+  components: {
+    Wrapper,
+  },
+  methods: {
+    setTab() {
+        let pathName = this.$route.name;
+        let tab = this.tabs.find(e => {
+            return e.name == pathName;
+        })
+      this.SET_TAB(tab);
+    },
+    ...mapActions(["GET_TABS", "GET_SOURCE", "GET_TIMEFRAME",'A_ENTITY_REQUEST']),
+    ...mapMutations(['SET_TAB'])
+  },
+  async created() {
+    await this.GET_TABS();
+    await this.GET_SOURCE();
+    await this.GET_TIMEFRAME();
+    this.setTab();
+    this.A_ENTITY_REQUEST();
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+    // this.fetch()
+  },
+  computed: {
+    ...mapState(["tabs"]),
+  }
+};
+</script>
