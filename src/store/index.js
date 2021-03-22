@@ -39,13 +39,6 @@ export default new Vuex.Store({
     CHOOSE_SOURCE(state, value) {
       state.chosenSource = value;
     },
-    // CHOSEN_TAB(state, value) {
-    //   state.tabs.forEach((e) => {
-    //     e.isActive = false;
-    //   });
-    //   value.isActive = true;
-    //   state.chosenTab = value;
-    // },
     SET_DEFAULT_TIMEFRAME(state, value) {
       state.timeFrame = value.slice(0,6);
       state.chosenTimeFrame = state.timeFrame.find((item) => {
