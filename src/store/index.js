@@ -4,7 +4,7 @@ import axios from "axios";
 Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
-    url: "http://addr.rco.ru/fxweb/api/",
+    url: "https://addr.rco.ru/fxweb/api/",
     header: { "Content-Type": "application/x-www-form-urlencoded" },
     timeFrame: null,
     chosenTimeFrame: null,
